@@ -54,14 +54,17 @@ function runSimulation() {
 
     let priorityResult = preemptivePriority(JSON.parse(JSON.stringify(processesData)));
     let srtfResult = srtfScheduling(JSON.parse(JSON.stringify(processesData)));
+    let nonPreemptivePriorityResult = nonPreemptivePriority(JSON.parse(JSON.stringify(processesData)));
 
     drawGantt("priorityGantt", priorityResult.timeline);
     drawGantt("strfGantt", srtfResult.timeline);
+    drawGantt("nonpreemptiveGantt", nonPreemptivePriorityResult.timeline);
 
     drawTable("priorityResultsBody", priorityResult.processes, "priorityAvg");
     drawTable("srtfResultsBody", srtfResult.processes, "srtfAvg");
+    drawTable("nonpreemptiveResultsBody", nonPreemptivePriorityResult.processes, "nonpreemptiveAvg");
 
-    compare(priorityResult, srtfResult);
+    compare(priorityResult, srtfResult, nonPreemptivePriorityResult);
 }
 function resetAll(){
     processesData = [];
@@ -74,5 +77,6 @@ function resetAll(){
     
     document.getElementById("priorityGantt").innerHTML = "";
     document.getElementById("strfGantt").innerHTML = "";
+    document.getElementById("nonpreemptiveGantt").innerHTML = "";
 }
 
