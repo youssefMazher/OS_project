@@ -21,7 +21,8 @@ Based on the simulation results, the following processes were used:
 
 ### Step 2: Arrival of P2 & P3 (Time = 1 ms & 2 ms)
 - In Priority: Although P2 and P3 arrive, they stay in the Ready Queue because their priorities (5 and 4) are lower than P1 (1). No Preemption occurs.
-- In SRTF: When P2 arrives at T=1, its remaining time (2ms) is much shorter than P1's remaining time (14ms). **Preemption occurs**, and P2 takes the CPU.
+- In SRTF: When P2 arrives at T=1, its remaining time (2ms) is much shorter than P1's remaining time (14ms). Preemption occurs, and P2 takes the CPU.
+- Priority Modes: In this specific case, Preemptive and Non-Preemptive Priority results are identical. This is because P1 (the first process) has the highest priority (1). Therefore, even in Preemptive mode, no arriving process (P2 or P3) could interrupt it, leading to a Convoy Effect where the shorter processes were stuck behind the long P1.
 
 ### Step 3: Completion & Re-scheduling
 - In Priority: After P1 finishes at T=15, the scheduler picks P3 (Priority 4) then P2 (Priority 5).
@@ -46,6 +47,13 @@ To verify the code results, we calculate the metrics for P1 manually:
 - Response Time (RT): 0 - 0 = 0 ms
 
 
+#### In Non-Preemptive Priority:
+- P1 starts at T=0 and finishes at T=15.
+- Completion Time (CT): 15 ms
+- TAT (CT - AT): 15 - 0 = 15 ms
+- WT (TAT - BT): 15 - 15 = 0 ms
+- RT: 0 - 0 = 0 ms
+  
 
 ### 5- Detailed Results Table:
 
@@ -82,6 +90,10 @@ To verify the code results, we calculate the metrics for P1 manually:
 
 
 ### 7- Conclusion
-SRTF is significantly more efficient in this scenario, reducing the Average Waiting Time from 10.00 ms to 2.00 ms. While Priority Scheduling kept P1 running because it was "important," SRTF recognized that finishing the shorter P2 and P3 first would drastically improve the overall system response time.
+- SRTF is significantly more efficient in this scenario, reducing the Average Waiting Time from 10.00 ms to 2.00 ms. While Priority Scheduling kept P1 running because it was "important," SRTF recognized that finishing the shorter P2 and P3 first would drastically improve the overall system response time.
+- The Convoy Effect: This scenario is a perfect example of the Convoy Effect. Even though P2 and P3 are very short (2ms and 3ms), they were "trapped" behind the   long P1 (15ms). This led to a massive increase in the Average Waiting Time for the whole system.
+- Priority vs. Efficiency: * In both Preemptive and Non-Preemptive Priority, the results were identical ($10.00ms$) because P1 already had the highest priority (1). No "Preemption" could happen even in the preemptive mode
+- This shows that Priority scheduling follows System Policy (Importance) but can be very Inefficient for overall performance
+
 
 ![Scenario B Result](../screenshots/Senario_B.PNG)
