@@ -50,6 +50,8 @@ assets/: contain details about used CPU algoriithms and pseudocode.
 -	The smallest priority number is the highest priority.
   
 -	It can be preemptive (interrupts the current process if a higher priority arrives) or non-preemptive (there isn't any interrupts in other words CPU doesn't stop running aany process until its terminate)
+
+-	Tie-Breaking Rule: If two processes have the same priority level, the process with the earliest Arrival Time (FCFS) is selected.
   
 -	Problem: the starvation problem (Low-priority processes may wait indefinitely and never execute).
   
@@ -66,10 +68,20 @@ assets/: contain details about used CPU algoriithms and pseudocode.
  - When a new process arrives in the ready queue the scheduler compares the remaining time of the current process with the burst time of the new one.
 
 - The process with the shortest remaining time is selected for execution (Remaining Time = Burst Time − Executed Time).
+
+- Tie-Breaking Rule: If remaining times are equal, the earliest Arrival Time is used.
   
 - It is considered optimal because it provides the minimum average waiting time for a given set of processes.
 
 - Disadvantage: It requires knowing or predicting the length of the next CPU burst, which is often unknown.
+
+## Comparison quality & Fairness:
+
+- Fairness: Priority scheduling is "Policy-based" (favors important tasks) but is less fair because of Starvation. SRTF is "Performance-based" and more efficient    but can also starve very long processes.
+  
+- Efficiency: SRTF typically yields the lowest Average Waiting Time compared to Priority scheduling.
+
+- Overhead: Preemptive modes (SRTF/Preemptive Priority) have higher overhead due to frequent Context Switching, while Non-Preemptive is more stable but may lead to the "Convoy Effect".
 
 
   ## Mathematical Formulas:
