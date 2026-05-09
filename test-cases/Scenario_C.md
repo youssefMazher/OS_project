@@ -25,6 +25,10 @@ Based on the simulation results, the following processes were used:
 - In both algorithms: P1 is preempted because the new arrivals have both a higher priority (1 vs 5) and a shorter burst time (2ms vs 19ms).
 - The CPU handles P2, then P3, then P4 in sequence.
 
+### Tie-Breaking in Action:
+- Notice that P2, P3, and P4 all have the same Priority (1) and the same Burst Time (2ms).
+- The scheduler resolved this "Tie" by using the FCFS (First-Come, First-Served) rule, executing them in the order of their arrival (P2 → P3 → P4).
+
 ### Step 3: Resuming the Long Task
 - After all short/high-priority tasks finish at **T=7 ms**, the CPU resumes **P1** to finish its remaining 19 ms.
 
@@ -40,7 +44,12 @@ To verify the code results, we calculate the metrics for P1 manually:
 - Waiting Time (WT): 26 - 20 = 6 ms
 - Response Time (RT): 0 - 0 = 0 ms
 
-
+#### In Non-Preemptive Priority Scheduling:
+- Logic: P1 starts at 0 ms. Since the algorithm is Non-Preemptive, it continues its execution until it finishes its entire burst time (20 ms), ignoring the higher-priority processes (P2, P3, P4) that arrive in the ready queue.
+- Completion Time (CT): 20 ms
+- Turnaround Time (TAT): 20 - 0 = 20 ms
+- Waiting Time (WT): 20 - 20 = 0 ms
+- Response Time (RT): 0 - 0 = 0 ms
 
 ### 5- Detailed Results Table:
 
@@ -80,6 +89,9 @@ To verify the code results, we calculate the metrics for P1 manually:
 
 
 ### 7- Conclusion
-In this scenario, there are tie between preemptive priority and SRTF and they are best optimal. The Comparison Summary shows a "Tie" in all metrics (Waiting Time, Turnaround Time, and Response Time). This proves that when priority assignments align with task lengths, the scheduling overhead and decisions become unified.
+- In this scenario, there are tie between preemptive priority and SRTF and they are best optimal. The Comparison Summary shows a "Tie" in all metrics (Waiting Time, Turnaround Time, and Response Time). This proves that when priority assignments align with task lengths, the scheduling overhead and decisions become unified.
+- Non-Preemptive Disaster: The Non-Preemptive mode caused a massive performance drop, increasing the waiting time from 2.25ms to 15.00ms.
+- The Convoy Effect (Again): Because P1 was long (20ms) and started first, it blocked the higher-priority tasks (P2, P3, P4) in Non-Preemptive mode. This proves that preemption is crucial when long background tasks are mixed with short, urgent tasks.
+
 
 ![Scenario C Result](../screenshots/Senario_C.PNG)
