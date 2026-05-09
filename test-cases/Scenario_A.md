@@ -24,6 +24,7 @@ Based on the simulation results, the following processes were used:
  - At T = 1 ms: P2 arrives and Preempts P1. This happens because:
  -     In Priority: P2 has a higher priority (1) than P1 (2)
  -     In SRTF: P2 has a shorter burst time (4) than P1's remaining time (7)
+ -     Non-Preemptive Priority: > - At T = 1 ms: Even though P2 has a higher priority, it DOES NOT preempt P1. P1 continues to run until it finishes its entire            burst time (T = 8 ms) because the system is in Non-Preemptive mode.
    
 
    ### Step 3: P2 Completion & Scheduler Decision (Time = 5 ms)
@@ -52,6 +53,12 @@ Based on the simulation results, the following processes were used:
    - TAT (CT - AT): 17 - 0 = 17 ms
    - WT (TAT - BT): 17 - 8 = 9 ms
    - RT: First Start - AT = 0 - 0 = 0 ms
+  ### In Non-Preemptive Priority:
+  - P1 starts at T=0 and finishes at T=8 (No interruptions).
+  - Completion Time (CT): 8 ms
+  - TAT (CT - AT): 8 - 0 = 8 ms
+  - WT (TAT - BT): 8 - 8 = 0 ms
+  - RT: First Start - AT = 0 - 0 = 0 ms
 
      ## 5-Detailed Results Table:
      ### Priority Scheduling (Preemptive)
