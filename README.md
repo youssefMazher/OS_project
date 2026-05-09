@@ -49,7 +49,7 @@ assets/: contain details about used CPU algoriithms and pseudocode.
   
 -	The smallest priority number is the highest priority.
   
--	It can be preemptive (interrupts the current process if a higher priority arrives) or non-preemptive (if no process with higher priority arrives will running current process) .
+-	It can be preemptive (interrupts the current process if a higher priority arrives) or non-preemptive (there isn't any interrupts in other words CPU doesn't stop running aany process until its terminate)
   
 -	Problem: the starvation problem (Low-priority processes may wait indefinitely and never execute).
   

@@ -7,10 +7,22 @@ function calculateAverages(processes, timeline) {
 }
 
 function compare(p, s, np) {
-    let bestRT = (p.avgRT < s.avgRT &&p.avgRT < np.avgRT ) ? "Priority Scheduling" : (s.avgRT < p.avgRT && s.avgRT < np.avgRT) ? "SRTF Scheduling" :(np.avgRT < p.avgRT && np.avgRT < s.avgRT)? "Nonpreemptive Priority Scheduling ": "Tie (Both Equal)";
-    let bestWT = (p.avgWT < s.avgWT &&p.avgWT < np.avgWT ) ? "Priority Scheduling" : (s.avgWT < p.avgWT && s.avgWT < np.avgWT) ? "SRTF Scheduling" :(np.avgWT < p.avgWT && np.avgWT < s.avgWT)? "Nonpreemptive Priority Scheduling ": "Tie (Both Equal)";
-    let bestTAT =(p.avgTAT < s.avgTAT &&p.avgTAT < np.avgTAT ) ? "Priority Scheduling" : (s.avgTAT < p.avgTAT && s.avgTAT < np.avgTAT) ? "SRTF Scheduling" :(np.avgTAT < p.avgTAT && np.avgTAT < s.avgTAT)? "Nonpreemptive Priority Scheduling ": "Tie (Both Equal)";
+    
+    function getBestAlgorithm(pVal, sVal, npVal) {
+        let minVal = Math.min(pVal, sVal, npVal);
+        let winners = [];
+        
+        if (pVal === minVal) winners.push("Preemptive Priority");
+        if (sVal === minVal) winners.push("SRTF");
+        if (npVal === minVal) winners.push("Non-Preemptive Priority");
+        
+        if (winners.length === 3) return "Tie (All Equal)";
+        return winners.join(" & ");
+    }
 
+    let bestRT = getBestAlgorithm(p.avgRT, s.avgRT, np.avgRT);
+    let bestWT = getBestAlgorithm(p.avgWT, s.avgWT, np.avgWT);
+    let bestTAT = getBestAlgorithm(p.avgTAT, s.avgTAT, np.avgTAT);
 
     document.getElementById("bestRtAlgorithm").innerText = bestRT;
     document.getElementById("bestWtAlgorithm").innerText = bestWT;
@@ -19,14 +31,19 @@ function compare(p, s, np) {
     let conclusionBox = document.getElementById("finalConclusionBox");
     conclusionBox.className = "alert alert-success"; 
     
-    if (p.avgWT < s.avgWT && p.avgWT < np.avgWT) {
-        conclusionBox.innerHTML = `<strong>Conclusion:</strong> For this specific set of processes, <strong>Priority Scheduling</strong> performed better overall due to lower waiting times.`;
-    } else if (s.avgWT < p.avgWT && s.avgWT < np.avgWT) {
-        conclusionBox.innerHTML = `<strong>Conclusion:</strong> For this specific set of processes, <strong>SRTF Scheduling</strong> is more optimal as it minimized the average waiting time effectively.`;
-    }else if(np.avgWT < s.avgWT && np.avgWT < p.avgWT) {
-        conclusionBox.innerHTML = `<strong>Conclusion:</strong> For this specific set of processes, <strong>Nonpreemptive Priority Scheduling</strong> is more optimal as it minimized the average waiting time effectively.`;
-    }else {
-        conclusionBox.innerHTML = `<strong>Conclusion:</strong> Both algorithms performed identically for this specific input in terms of average waiting time.`;
+    let minWT = Math.min(p.avgWT, s.avgWT, np.avgWT);
+    let winnersWT = [];
+    
+    if (p.avgWT === minWT) winnersWT.push("<strong>Preemptive Priority</strong>");
+    if (s.avgWT === minWT) winnersWT.push("<strong>SRTF</strong>");
+    if (np.avgWT === minWT) winnersWT.push("<strong>Non-Preemptive Priority</strong>");
+
+    if (winnersWT.length === 3) {
+        conclusionBox.innerHTML = `<strong>Conclusion:</strong> All three algorithms performed identically for this specific input in terms of average waiting time.`;
+    } else if (winnersWT.length === 2) {
+        conclusionBox.innerHTML = `<strong>Conclusion:</strong> For this specific set of processes, ${winnersWT.join(" and ")} performed best as they equally minimized the average waiting time.`;
+    } else {
+        conclusionBox.innerHTML = `<strong>Conclusion:</strong> For this specific set of processes, ${winnersWT[0]} is more optimal as it minimized the average waiting time effectively.`;
     }
 }
 

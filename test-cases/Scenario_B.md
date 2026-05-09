@@ -56,6 +56,13 @@ To verify the code results, we calculate the metrics for P1 manually:
 | P2 | 1 | 20 | 19 | 17 | 17 |
 | P3 | 2 | 18 | 16 | 13 | 13 |
 
+#### Priority Scheduling (Non Preemptive)
+| Process | AT | CT | TAT (CT-AT) | WT (TAT-BT) | RT |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| P1 | 0 | 15 | 15 | 0 | 0 |
+| P2 | 1 | 20 | 19 | 17 | 17 |
+| P3 | 2 | 18 | 16 | 13 | 13 |
+
 #### SRTF Scheduling
 | Process | AT | CT | TAT (CT-AT) | WT (TAT-BT) | RT |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -66,11 +73,11 @@ To verify the code results, we calculate the metrics for P1 manually:
 
 
 ### 6- Results Summary (Averages):
-| Metric | Priority Scheduling | SRTF Scheduling |
+| Metric | Preemptive Priority Scheduling | SRTF Scheduling | Non preemptive Priority Scheduling
 | :--- | :---: | :---: |
-| Avg Waiting Time | 10.00 ms | 2.00 ms |
-| Avg Turnaround Time | 16.67 ms | 8.67 ms |
-| Avg Response Time | 10.00 ms | 0.33 ms |
+| Avg Waiting Time | 10.00 ms | 2.00 ms | 10.00 ms
+| Avg Turnaround Time | 16.67 ms | 8.67 ms | 16.67 ms
+| Avg Response Time | 10.00 ms | 0.33 ms | 10.00 ms
 
 
 

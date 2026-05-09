@@ -62,6 +62,14 @@ Based on the simulation results, the following processes were used:
      | P3 | 2 | 21 | 19 | 10 | 10 |
      | P4 | 3 | 26 | 23 | 18 | 18 |
 
+     ### Priority Scheduling (Non Preemptive)
+     | Process | AT | CT | TAT (CT-AT) | WT (TAT-BT) | RT |
+     | :--- | :---: | :---: | :---: | :---: | :---: |
+     | P1 | 0 | 8 | 8 | 0 | 0 |
+     | P2 | 1 | 12 | 11 | 7 | 7 |
+     | P3 | 2 | 26 | 24 | 15 | 15 |
+     | P4 | 3 | 17 | 14 | 9 | 9 |
+
      ### SRTF Scheduling
      | Process | AT | CT | TAT (CT-AT) | WT (TAT-BT) | RT |
      | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -71,14 +79,14 @@ Based on the simulation results, the following processes were used:
      | P4 | 3 | 10 | 7 | 2 | 2 |
 
      ## 6-Results Summary (Averages):
-     | Metric | Priority Scheduling | SRTF Scheduling |
+     | Metric | Preemptive Priority Scheduling | SRTF Scheduling | Non preemptive Priority Scheduling
      | :--- | :---: | :---: |
-     | Avg Waiting Time | 8.00 ms | 6.50 ms |
-     | **Avg Turnaround Time** | 14.50 ms | 13.00 ms |
-     | **Avg Response Time** | 7.00 ms | 4.25 ms |
+     | Avg Waiting Time | 8.00 ms | 6.50 ms | 7.75 ms
+     | **Avg Turnaround Time** | 14.50 ms | 13.00 ms | 14.25 ms
+     | **Avg Response Time** | 7.00 ms | 4.25 ms | 7.75 ms
 
      ## 7-Conclusion
-     SRTF performed better in this scenario with a lower Average Waiting Time (**6.50 ms**). The difference in P1's waiting time (4ms vs 9ms) shows how SRTF prioritize shorter tasks over the original process
+     SRTF performed better in this scenario with a lower Average Waiting Time (**6.50 ms**). The difference in P1's waiting time (4ms vs 0ms vs 9ms) shows how SRTF prioritize shorter tasks over the original process
 
      ![Scenario A Result](../screenshots/Senario_A.PNG)
    

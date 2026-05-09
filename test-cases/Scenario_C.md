@@ -52,6 +52,14 @@ To verify the code results, we calculate the metrics for P1 manually:
 | P3 | 2 | 5 | 3 | 1 | 1 |
 | P4 | 3 | 7 | 4 | 2 | 2 |
 
+#### Priority Scheduling (Non Preemptive)
+| Process | AT | CT | TAT (CT-AT) | WT (TAT-BT) | RT |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| P1 | 0  | 20 | 20 | 0 | 0 |
+| P2 | 1 | 22 | 21 | 19 | 19 |
+| P3 | 2 | 24 | 22 | 20 | 20 |
+| P4 | 3 | 26 | 23 | 21 | 21 |
+
 #### SRTF Scheduling
 | Process | AT | CT | TAT (CT-AT) | WT (TAT-BT) | RT |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -63,15 +71,15 @@ To verify the code results, we calculate the metrics for P1 manually:
 
 
 ### 6- Results Summary (Averages):
-| Metric | Priority Scheduling | SRTF Scheduling |
+| Metric | Preemptive Priority Scheduling | SRTF Scheduling | Non Preemptive Priority
 | :--- | :---: | :---: |
-| Avg Waiting Time | 2.25 ms | 2.25 ms |
-| Avg Turnaround Time | 8.75 ms | 8.75 ms |
-| Avg Response Time | 0.75 ms | 0.75 ms |
+| Avg Waiting Time | 2.25 ms | 2.25 ms | 15ms
+| Avg Turnaround Time | 8.75 ms | 8.75 ms | 15ms
+| Avg Response Time | 0.75 ms | 0.75 ms | 21.5ms
 
 
 
 ### 7- Conclusion
-In this scenario, both algorithms performed identically. The Comparison Summary shows a "Tie" in all metrics (Waiting Time, Turnaround Time, and Response Time). This proves that when priority assignments align with task lengths, the scheduling overhead and decisions become unified.
+In this scenario, there are tie between preemptive priority and SRTF and they are best optimal. The Comparison Summary shows a "Tie" in all metrics (Waiting Time, Turnaround Time, and Response Time). This proves that when priority assignments align with task lengths, the scheduling overhead and decisions become unified.
 
 ![Scenario C Result](../screenshots/Senario_C.PNG)
