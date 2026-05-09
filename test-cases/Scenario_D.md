@@ -43,12 +43,12 @@ The following invalid values were entered to test the system's validation logic:
 
 
 ### 6- Results Summary (Averages):
-| Metric | Priority Scheduling | SRTF Scheduling |
-| :--- | :---: | :---: |
-| Avg Waiting Time | 0.00 ms | 0.00 ms |
-| Avg Turnaround Time | 0.00 ms | 0.00 ms |
-| Avg Response Time| 0.00 ms | 0.00 ms |
 
+| Metric | Preemptive Priority | SRTF Scheduling | Non-Preemptive Priority |
+| :--- | :---: | :---: | :---: |
+| Avg Waiting Time | 0.00 ms | 0.00 ms | **0.00 ms** |
+| Avg Turnaround Time | 0.00 ms | 0.00 ms | **0.00 ms** |
+| Avg Response Time | 0.00 ms | 0.00 ms | **0.00 ms** |
 
 
 ### 7- Conclusion
