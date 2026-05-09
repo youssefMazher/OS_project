@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling: Priority vs SRTF</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        #priorityGantt, #strfGantt {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <h2 class="text-primary fw-bold">CPU Scheduling Simulator</h2>
+                <h5 class="text-secondary">Comparative Analysis: Priority vs. SRTF</h5>
+                <hr class="w-25 mx-auto text-muted">
+            </div>
+        </div>
+
+        <form>
+            <div class="row justify-content-center">
+                <div class="mb-3 col-md-3">
+                    <label for="ArrivalTime" class="form-label">Arrival Time</label>
+                    <input type="number" class="form-control" id="ArrivalTime">
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="BurstTime" class="form-label">Burst Time</label>
+                    <input type="number" class="form-control" id="BurstTime">
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="PriorityValue" class="form-label">Priority Value</label>
+                    <input type="number" class="form-control" id="PriorityValue">
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <button type="button" class="btn btn-primary me-2" onclick="addProcess()">Add Process</button>
+                <button type="button" class="btn btn-success" onclick="runSimulation()">Run Simulation</button>
+                <button type="button" class="btn btn-danger" onclick="resetAll()">Reset</button>
+            </div>
+        </form>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h3 class="text-secondary mb-3">Processes List</h3>
+                <table class="table table-striped table-hover border text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Process ID</th>
+                            <th>Arrival Time</th>
+                            <th>Burst Time</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody id="processTableBody">
+                        <tr>
+                            <td colspan="4" class="text-muted">No processes added yet.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12 mb-4">
+                <h4>Priority Scheduling - Gantt Chart</h4>
+                <div id="priorityGantt" class="border bg-light p-3" style="min-height: 80px; overflow-x: auto;"></div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+                <h4>SRTF Scheduling - Gantt Chart</h4>
+                <div id="strfGantt" class="border bg-light p-3" style="min-height: 80px; overflow-x: auto;"></div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6 mb-4">
+                <h4 class="text-primary">Priority Results</h4>
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>PID</th>
+                            <th>RT</th>
+                            <th>WT</th>
+                            <th>TAT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="priorityResultsBody">
+                        <tr>
+                            <td colspan="4" class="text-muted">Results will appear here...</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-light fw-bold">
+                        <tr>
+                            <td>Average</td>
+                            <td id="priorityAvgRT">0.0</td>
+                            <td id="priorityAvgWT">0.0</td>
+                            <td id="priorityAvgTAT">0.0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <h4 class="text-success">SRTF Results</h4>
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-success">
+                        <tr>
+                            <th>PID</th>
+                            <th>RT</th>
+                            <th>WT</th>
+                            <th>TAT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="srtfResultsBody">
+                        <tr>
+                            <td colspan="4" class="text-muted">Results will appear here...</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-light fw-bold">
+                        <tr>
+                            <td>Average</td>
+                            <td id="srtfAvgRT">0.0</td>
+                            <td id="srtfAvgWT">0.0</td>
+                            <td id="srtfAvgTAT">0.0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-md-12">
+                <div class="card shadow-sm border-0 bg-light">
+                    <div class="card-body p-4">
+                        <h3 class="card-title text-center mb-4 border-bottom pb-3">Simulation Summary & Conclusion</h3>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6 border-end">
+                                <h5 class="text-info mb-3">Comparison Summary</h5>
+                                <ul class="list-group list-group-flush bg-transparent">
+                                    <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+                                        <strong>Best Average RT:</strong> 
+                                        <span id="bestRtAlgorithm"></span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+                                        <strong>Best Average WT:</strong> 
+                                        <span id="bestWtAlgorithm"></span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+                                        <strong>Best Average TAT:</strong> 
+                                        <span id="bestTatAlgorithm" ></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="col-md-6 ps-4">
+                                <h5 class="text-danger mb-3">Final Conclusion</h5>
+                                <div class="alert alert-warning" role="alert" id="finalConclusionBox">
+                                    <h6 class="alert-heading m-0">Waiting for Simulation...</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script src="../model/Proccess.js"></script>
+     <script src="../metrics/Metrics.js"></script>
+     <script src="../scheduler/PriorityScheduler.js"></script>
+     <script src="../scheduler/SrtfScheduler.js"></script>
+     <script src="../util/Render.js"></script>
+</body>
+</html>
