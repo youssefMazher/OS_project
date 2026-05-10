@@ -70,6 +70,8 @@ assets/: contain details about used CPU algoriithms and pseudocode.
 - The process with the shortest remaining time is selected for execution (Remaining Time = Burst Time − Executed Time).
 
 - Tie-Breaking Rule: If remaining times are equal, the earliest Arrival Time is used.
+- If they arrive at the exact same time, the process with the smaller ID runs first.
+- If a new process arrives with a priority or remaining time equal to the currently running process, the system will not preempt. The current process continues to run to minimize Context Switching overhead.
   
 - It is considered optimal because it provides the minimum average waiting time for a given set of processes.
 
