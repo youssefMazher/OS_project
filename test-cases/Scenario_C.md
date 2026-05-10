@@ -28,6 +28,7 @@ Based on the simulation results, the following processes were used:
 ### Tie-Breaking in Action:
 - Notice that P2, P3, and P4 all have the same Priority (1) and the same Burst Time (2ms).
 - The scheduler resolved this "Tie" by using the FCFS (First-Come, First-Served) rule, executing them in the order of their arrival (P2 → P3 → P4).
+- Note: If they had arrived at the exact same time, the system would have prioritized them based on their PID/Index (P2 then P3 then P4).
 
 ### Step 3: Resuming the Long Task
 - After all short/high-priority tasks finish at **T=7 ms**, the CPU resumes **P1** to finish its remaining 19 ms.
