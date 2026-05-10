@@ -112,8 +112,10 @@ assets/: contain details about used CPU algoriithms and pseudocode.
      the first response is produced
     
             Response time = FirstStartExcussion − ArrivalTime
-
-
+          ش
+ش
+-  Average Response Time:
+-     Avg RT =  (sum Response Times)/(Number of Processes)
 
 ##  Test Scenarios & Simulation Results
 
