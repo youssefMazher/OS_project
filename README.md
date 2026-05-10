@@ -79,7 +79,7 @@ assets/: contain details about used CPU algoriithms and pseudocode.
 
 ## Comparison quality & Fairness:
 
-- Fairness: Priority scheduling is "Policy-based" (favors important tasks) but is less fair because of Starvation. SRTF is "Performance-based" and more efficient    but can also starve very long processes.
+- Fairness: Priority scheduling is "Policy-based" (favors important tasks) but is less fair because of Starvation. SRTF is "Performance-based" and more efficient but can also starve very long processes.
   
 - Efficiency: SRTF typically yields the lowest Average Waiting Time compared to Priority scheduling.
 
