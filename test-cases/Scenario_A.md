@@ -26,7 +26,9 @@ Based on the simulation results, the following processes were used:
  -     In SRTF: P2 has a shorter burst time (4) than P1's remaining time (7)
  -     Non-Preemptive Priority: > - At T = 1 ms: Even though P2 has a higher priority, it DOES NOT preempt P1. P1 continues to run until it finishes its entire            burst time (T = 8 ms) because the system is in Non-Preemptive mode.
    
-
+-  Logic Check (No-Preemption on Tie):
+ - At T=1 ms, P2 (4ms) preempted P1 (7ms remaining) because 4 < 7.
+- Note: According to our system logic, if P2's burst time had been **7ms** (equal to P1's remaining time), P1 would have continued its execution without preemption to save context-switching time.
    ### Step 3: P2 Completion & Scheduler Decision (Time = 5 ms)
    - P2 finishes its execution.
    - The scheduler now has three processes waiting: P1 (7 ms left), P3 (9 ms), and P4 (5 ms).
