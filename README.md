@@ -49,7 +49,7 @@ assets/: contain details about used CPU algoriithms and pseudocode.
   
 -	The smallest priority number is the highest priority.
   
--	It can be preemptive (interrupts the current process if a higher priority arrives) or non-preemptive (there isn't any interrupts in other words CPU doesn't stop running aany process until its terminate)
+-	It can be preemptive (interrupts the current process if a higher priority arrives) or non-preemptive (there isn't any interrupts in other words CPU doesn't stop running any process until it terminates)
 
 -	Tie-Breaking Rule: If two processes have the same priority level, the process with the earliest Arrival Time (FCFS) is selected or If they arrive at the exact  same time, the process with the smaller PID (Index) is selected first..
   
